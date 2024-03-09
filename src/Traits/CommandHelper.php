@@ -11,15 +11,10 @@ trait CommandHelper
     {
         return $this->option('custom') === true;
     }
-
+    
     protected function isForce()
     {
         return $this->option('force') === true;
-    }
-
-    protected function isInline()
-    {
-        return $this->option('inline') === true;
     }
 
     protected function ensureDirectoryExists($path)

@@ -23,37 +23,23 @@ You can install the package via composer:
 composer require itutu-media/laravel-modules-livewire-table
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-modules-livewire-table-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="laravel-modules-livewire-table-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-modules-livewire-table-views"
-```
+You can publish stubs with:
+  ```bash
+  php artisan vendor:publish --tag=modules-livewire-table-stub
+  ```
 
 ## Usage
 
-```php
-$laravelModulesLivewireTable = new ITUTUMedia\LaravelModulesLivewireTable();
-echo $laravelModulesLivewireTable->echoPhrase('Hello, ITUTUMedia!');
+```bash
+php artisan module:make-datatable [TableName] [ModelClass] [ModuleName]
+```
+e.g
+```bash
+php artisan module:make-datatable User/UserTable App/Models/User Core
+```
+or
+```bash
+php artisan module:make-datatable User/UserTable User Core
 ```
 
 ## Testing

@@ -96,14 +96,6 @@ trait ComponentParser
             ? $publishedStubDir
             : $defaultStubDir;
 
-        if ($this->option('stub')) {
-            $customStubDir = Str::of(base_path('stubs/'))
-                ->append($this->option('stub').'/')
-                ->replace(['../', './'], '');
-
-            $stubDir = File::isDirectory($customStubDir) ? $customStubDir : $stubDir;
-        }
-
         $classStubName = 'table.stub';
 
         $classStub = File::exists($stubDir.$classStubName)
@@ -120,13 +112,9 @@ trait ComponentParser
     {
         $template = file_get_contents($this->component->stub->class);
 
-        if ($this->isInline()) {
-            $template = preg_replace('/\[quote\]/', $this->getComponentQuote(), $template);
-        }
-
         return preg_replace(
             ['/\[namespace\]/', '/\[class\]/', '/\[model\]/', '/\[model_import\]/', '/\[columns\]/'],
-            [$this->getClassNamespace(), $this->getClassName(), $this->model, $this->getModelImport(), $this->generateColumns($this->getModelImport())],
+            [$this->getClassNamespace(), $this->getClassName(), $this->getModelName(), $this->getModelImport(), $this->generateColumns($this->getModelImport())],
             $template,
         );
     }
@@ -171,17 +159,14 @@ trait ComponentParser
         if (File::exists(app_path($this->model.'.php'))) {
             return 'App\\'.$this->model;
         }
+        
+        return str_replace('/', '\\', $this->model);
+    }
 
-        if (isset($this->modelPath)) {
-            if (File::exists(rtrim($this->modelPath, '/').'/'.$this->model.'.php')) {
-
-                return Str::studly(str_replace('/', '\\', $this->modelPath)).$this->model;
-            }
-        }
-
-        $this->error('Could not find path to model.');
-
-        return 'App\Models\\'.$this->model;
+    public function getModelName(): string
+    {
+        $explode = explode('\\', $this->getModelImport());
+        return end($explode);
     }
 
     protected function getClassSourcePath()
@@ -214,7 +199,7 @@ trait ComponentParser
 
     protected function getComponentQuote()
     {
-        return "The <code>{$this->getClassName()}</code> livewire component is loaded from the ".($this->isCustomModule() ? 'custom ' : '')."<code>{$this->getModuleName()}</code> module.";
+        return "The <code>{$this->getClassName()}</code> livewire component is loaded<code>{$this->getModuleName()}</code> module.";
     }
 
     protected function getBasePath($path = null)

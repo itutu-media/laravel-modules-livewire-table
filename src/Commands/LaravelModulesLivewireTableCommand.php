@@ -10,10 +10,7 @@ class LaravelModulesLivewireTableCommand extends Command
 {
     use ComponentParser;
 
-    public $signature = 'module:make-datatable
-                        {component: The name of the component}
-                        {module: The name of the module}
-                        {model: The name of the model}';
+    public $signature = 'module:make-datatable {component} {model} {module} {--force} {--custom}';
 
     public $description = 'Create a new Livewire table component for a module';
 
@@ -37,8 +34,6 @@ class LaravelModulesLivewireTableCommand extends Command
             $this->line("<options=bold,reverse;fg=green> COMPONENT CREATED </> 🤙\n");
 
             $class && $this->line("<options=bold;fg=green>CLASS:</> {$this->getClassSourcePath()}");
-
-            $class && $this->line("<options=bold;fg=green>TAG:</> {$class->tag}");
         }
 
         return false;
