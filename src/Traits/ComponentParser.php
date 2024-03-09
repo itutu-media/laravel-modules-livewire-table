@@ -112,7 +112,7 @@ trait ComponentParser
 
         return (object) [
             'dir' => $stubDir,
-            'class' => $classStub
+            'class' => $classStub,
         ];
     }
 
@@ -130,7 +130,7 @@ trait ComponentParser
             $template,
         );
     }
-    
+
     private function generateColumns(string $modelName): string
     {
         $model = new $modelName();

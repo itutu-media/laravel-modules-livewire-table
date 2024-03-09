@@ -9,7 +9,7 @@ use ITUTUMedia\LaravelModulesLivewireTable\Traits\ComponentParser;
 class LaravelModulesLivewireTableCommand extends Command
 {
     use ComponentParser;
-    
+
     public $signature = 'module:make-datatable
                         {component: The name of the component}
                         {module: The name of the module}

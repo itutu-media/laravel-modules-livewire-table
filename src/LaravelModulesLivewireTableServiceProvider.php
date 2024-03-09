@@ -2,9 +2,9 @@
 
 namespace ITUTUMedia\LaravelModulesLivewireTable;
 
+use ITUTUMedia\LaravelModulesLivewireTable\Commands\LaravelModulesLivewireTableCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use ITUTUMedia\LaravelModulesLivewireTable\Commands\LaravelModulesLivewireTableCommand;
 
 class LaravelModulesLivewireTableServiceProvider extends PackageServiceProvider
 {
