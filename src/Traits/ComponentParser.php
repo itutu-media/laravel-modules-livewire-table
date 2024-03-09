@@ -159,13 +159,14 @@ trait ComponentParser
         if (File::exists(app_path($this->model.'.php'))) {
             return 'App\\'.$this->model;
         }
-        
+
         return str_replace('/', '\\', $this->model);
     }
 
     public function getModelName(): string
     {
         $explode = explode('\\', $this->getModelImport());
+
         return end($explode);
     }
 
